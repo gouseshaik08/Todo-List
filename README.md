@@ -31,8 +31,8 @@ This is a simple Todo List application built using Spring Boot and Thymeleaf. Th
 
    ```bash
    git clone https://github.com/your-username/todo-list.git
-   cd todo-list
-
+   cd todo-list 
+```
 #### 2. Configure the MySQL database:
    Update the application.properties file with your MySQL database credentials:
     spring.datasource.url=jdbc:mysql://localhost:3306/todo_db(your database name)
