@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Todo Item</title>
+    <style>
+        /* CSS styles for centering and coloring */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        .container {
+            text-align: center;
+            padding: 40px; /* Increased padding */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff; /* White background */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Light shadow */
+            max-width: 600px; /* Increased width */
+            max-height: 600px; /* Added height */
+        }
+        input, button, a, select {
+            margin: 8px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(100% - 22px); /* Adjust width to fit container */
+        }
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: calc(100% - 22px); /* Adjust width to fit container */
+        }
+        a {
+            background-color: #008CBA; /* Blue */
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            width: calc(100% - 60px); /* Adjust width to fit container */
+        }
+    </style>
+    <script>
+        // JavaScript to prevent selecting previous dates
+        window.onload = function() {
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').min = today;
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #333;">Edit Todo Item</h1>
+        
+        <!-- Form to edit an existing todo -->
+        <form th:action="@{/editsavetodoItem}" method="post" th:object="${td}">
+            <input type="hidden" th:field="*{id}" />
+            <p><input type="text" th:field="*{title}" placeholder="Title" required /></p>
+            <p><input type="date" th:field="*{date}" id="date" required /></p>
+            <p><input type="text" th:field="*{status}" placeholder="Status" required /></p>
+            <p><button type="submit">Save</button></p>
+        </form>
+        
+        <!-- Link back to todo list -->
+        <a href="/viewtodoList">Back to Todo List</a>
+    </div>
+</body>
+</html>

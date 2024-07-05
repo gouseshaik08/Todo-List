@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <style>
+        /* Center align the todo list heading */
+        h1 {
+            text-align: center;
+        }
+        
+        /* Center align and style the table */
+        table {
+            margin: 0 auto; /* Center align the table */
+            width: 80%; /* Set the table width */
+            border-collapse: collapse; /* Collapse borders */
+        }
+        
+        /* Style the "Add New Todo" link */
+        .add-todo {
+            display: block;
+            width: fit-content;
+            margin: 20px auto; /* Center align with margin */
+            padding: 10px;
+            background-color: #3498db; /* Blue color */
+            color: white;
+            text-align: center;
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px;
+        }
+        
+        .add-todo:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+        
+        /* Style action buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            gap: 10px; /* Adjust spacing between buttons */
+        }
+        
+        .action-button {
+            padding: 4px 8px; /* Reduced padding for buttons */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px; /* Reduced font size for buttons */
+            text-decoration: none;
+        }
+        
+        .complete-button {
+            background-color: #f39c12; /* Orange */
+            color: white;
+        }
+        
+        .edit-button {
+            background-color: #2ecc71; /* Green */
+            color: white;
+        }
+        
+        .delete-button {
+            background-color: #e74c3c; /* Red */
+            color: white;
+        }
+        
+        .action-button:hover {
+            opacity: 0.8;
+        }
+
+        /* Flash message styling */
+        .flash-message {
+            text-align: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    
+    <!-- Flash message display -->
+    <div id="flashMessage" class="flash-message" th:if="${msg != null and not #strings.isEmpty(msg)}">
+        <p th:text="${msg}"></p>
+    </div>
+    
+    <!-- Display todo list -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th style="width: 200px;">Actions</th> <!-- Set fixed width for Actions column -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="todo : ${list}">
+                <td th:text="${todo.title}"></td>
+                <td th:text="${todo.date}"></td>
+                <td th:text="${todo.status}"></td>
+                <td>
+                    <div class="action-buttons">
+                        <form th:action="@{/updatetodoStatus/{id}(id=${todo.id})}" method="post">
+                            <button type="submit" class="action-button complete-button">Complete</button>
+                        </form>
+                        <a th:href="@{/edittodoItem/{id}(id=${todo.id})}" class="action-button edit-button">Edit</a>
+                        <a th:href="@{/deletetodoItem/{id}(id=${todo.id})}" class="action-button delete-button">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Link to add a new todo -->
+    <a href="/addtodoItem" class="add-todo">Add New Todo</a>
+    
+    <!-- JavaScript for flashing message -->
+    <script>
+        // Show flash message if not empty
+        var flashMessage = document.getElementById('flashMessage');
+        if (flashMessage && flashMessage.textContent.trim() !== '') {
+            flashMessage.style.display = 'block';
+            setTimeout(function() {
+                flashMessage.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+    </script>
+</body>
+</html>
