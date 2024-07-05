@@ -47,11 +47,14 @@ This is a simple Todo List application built using Spring Boot and Thymeleaf. Th
     Open your browser and go to http://localhost:8080.
     
 ### Usage
-   #### Add Todo Item: Navigate to the "Add Todo Item" page and fill out the form. The status field can be typed manually, and the date field does not allow past dates.
+   #### Add Todo Item: 
+      Navigate to the "Add Todo Item" page and fill out the form. The status field can be typed manually, and the date field does not allow past dates.
 
-   #### Edit Todo Item: Navigate to the "Edit Todo Item" page for a specific todo item and update the form as needed. The status field can be typed manually, and the date field does not allow past dates.
+   #### Edit Todo Item: 
+      Navigate to the "Edit Todo Item" page for a specific todo item and update the form as needed. The status field can be typed manually, and the date field does not allow past dates.
 
-   #### View Todo List: Navigate to the "View Todo List" page to see all todo items.
+   #### View Todo List: 
+      Navigate to the "View Todo List" page to see all todo items.
 
 ### Folder Structure
 
